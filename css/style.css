@@ -1,0 +1,222 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('../images/background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #333;
+    transition: background-image 0.5s ease;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-family: 'Rubik Maps', cursive;
+    font-size: 3rem;
+    color: #FF6B6B;
+    text-shadow: 3px 3px 0 #FFE66D, 5px 5px 0 #4ECDC4;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+}
+
+.theme-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.theme-buttons button {
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+}
+
+.theme-buttons button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+#animais {
+    background-color: #4ECDC4;
+    color: white;
+}
+
+#casa {
+    background-color: #FF6B6B;
+    color: white;
+}
+
+#escola {
+    background-color: #FFE66D;
+    color: #333;
+}
+
+#frutas {
+    background-color: #A5DD9B;
+    color: white;
+}
+
+#profissoes {
+    background-color: #B19CD9;
+    color: white;
+}
+
+.game-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 30px;
+    width: 70%;
+    margin: 0 auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: all 0.5s ease;
+}
+
+.word-display {
+    font-size: 2.5rem;
+    letter-spacing: 10px;
+    margin: 30px 0;
+    min-height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #333;
+}
+
+.hangman-container {
+    margin: 20px 0;
+    position: relative;
+}
+
+.hangman-image {
+    height: 200px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0 auto;
+}
+
+.message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: bold;
+    color: #FF6B6B;
+    text-shadow: 2px 2px 0 white;
+}
+
+.keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.key {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background-color: #4ECDC4;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 3px 0 #3aa89f;
+}
+
+.key:hover {
+    background-color: #3aa89f;
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #3aa89f;
+}
+
+.key:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.lose-message {
+    animation: blink 1s infinite;
+}
+
+.win-message {
+    color: #A5DD9B;
+    font-size: 2.5rem;
+    animation: bounce 1s infinite;
+}
+
+@media (max-width: 768px) {
+    .game-container {
+        width: 90%;
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .word-display {
+        font-size: 1.5rem;
+        letter-spacing: 5px;
+    }
+    
+    .key {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+}
