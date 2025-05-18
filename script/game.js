@@ -19,6 +19,10 @@ const WORDS = {
     profissoes: [
         "MEDICO", "PROFESSOR", "ENGENHEIRO", "ADVOGADO", "ARQUITETO", "ENFERMEIRO", "POLICIAL", "BOMBEIRO", "JORNALISTA", "ATOR",
         "CANTOR", "ESCRITOR", "PINTOR", "MUSICO", "COZINHEIRO", "GARCOM", "VENDEDOR", "MOTORISTA", "PILOTO", "ASTRONAUTA"
+    ],
+    familia: [
+        "CLARISSE", "JOAO MARCOS", "JOAO LUCAS", "RAFAEL HENRIQUE", "LILIAN", 
+        "CRISTIANA", "ROGERIO", "PEDRO", "GIOVANA"
     ]
 };
 
@@ -29,6 +33,12 @@ const keyboard = document.getElementById('keyboard');
 const hangmanImage = document.getElementById('hangman-image');
 const messageElement = document.getElementById('message');
 const body = document.querySelector('body');
+
+// Elementos de áudio
+const correctSound = document.getElementById('correctSound');
+const wrongSound = document.getElementById('wrongSound');
+const winSound = document.getElementById('winSound');
+const loseSound = document.getElementById('loseSound');
 
 // Variáveis do jogo
 let selectedTheme = '';
@@ -45,12 +55,9 @@ function initGame() {
     // Adiciona eventos aos botões de tema
     themeButtons.forEach(button => {
         button.addEventListener('click', function() {
-            console.log("Botão clicado:", this.id);
             selectTheme(this.id);
         });
     });
-    
-    console.log('Jogo inicializado!');
 }
 
 // Cria o teclado
@@ -75,17 +82,14 @@ function selectTheme(theme) {
     wrongLetters = [];
     gameOver = false;
     
-    console.log('Tema selecionado:', theme);
-    console.log('Palavra selecionada:', selectedWord);
-    
     // Atualiza o background
-    body.style.backgroundImage = `url('../images/${theme}.png')`;
+    body.style.backgroundImage = `url('images/${theme}.jpg')`;
     
     // Atualiza a exibição da palavra
     updateWordDisplay();
     
     // Mostra a forca inicial
-    hangmanImage.style.backgroundImage = "url('../images/forca1.png')";
+    hangmanImage.style.backgroundImage = "url('images/forca1.jpg')";
     messageElement.textContent = '';
     messageElement.className = 'message';
     
@@ -101,17 +105,23 @@ function updateWordDisplay() {
     
     selectedWord.split('').forEach(letter => {
         const letterElement = document.createElement('span');
-        letterElement.textContent = correctLetters.includes(letter) ? letter : '_';
+        if (letter === ' ') {
+            letterElement.innerHTML = '&nbsp;';
+        } else {
+            letterElement.textContent = correctLetters.includes(letter) ? letter : '_';
+        }
         letterElement.className = 'letter';
         wordDisplay.appendChild(letterElement);
     });
     
     // Verifica se o jogador ganhou
-    if (!wordDisplay.textContent.includes('_')) {
-        gameOver = true;
-        messageElement.textContent = 'Parabéns! Você ganhou!';
-        messageElement.classList.add('win-message');
-    }
+if (!wordDisplay.textContent.includes('_')) {
+    gameOver = true;
+    messageElement.textContent = 'Parabéns! Você ganhou!';
+    messageElement.classList.remove('lose-message');
+    messageElement.classList.add('win-message');
+    winSound.play();
+}
 }
 
 // Processa o palpite do jogador
@@ -127,12 +137,14 @@ function handleGuess(letter) {
         if (!correctLetters.includes(letter)) {
             correctLetters.push(letter);
             updateWordDisplay();
+            correctSound.play();
         }
     } else {
         // Letra incorreta
         if (!wrongLetters.includes(letter)) {
             wrongLetters.push(letter);
             updateHangmanImage();
+            wrongSound.play();
         }
     }
 }
@@ -142,7 +154,7 @@ function updateHangmanImage() {
     const errors = wrongLetters.length;
     
     if (errors <= 6) {
-        hangmanImage.style.backgroundImage = `url('../images/forca${errors + 1}.png')`;
+        hangmanImage.style.backgroundImage = `url('images/forca${errors + 1}.jpg')`;
     }
     
     if (errors === 6) {
@@ -150,6 +162,7 @@ function updateHangmanImage() {
         messageElement.textContent = 'Você perdeu!';
         messageElement.classList.add('lose-message');
         wordDisplay.textContent = selectedWord;
+        loseSound.play();
     }
 }
 

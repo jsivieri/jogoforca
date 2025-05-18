@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-image: url('../images/background.png');
+    background-image: url('../images/background.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -196,6 +196,11 @@ h1 {
 .win-message {
     color: #A5DD9B;
     font-size: 2.5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 2px 2px 0 #333;
     animation: bounce 1s infinite;
 }
 
@@ -219,4 +224,25 @@ h1 {
         height: 30px;
         font-size: 1rem;
     }
+}
+
+#familia {
+    background-color: #FF9F1C;
+    color: white;
+}
+
+/* Ajuste para espaços nos nomes */
+.word-display .letter {
+    margin: 0 5px;
+}
+
+#message {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 100% !important;
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
