@@ -76,6 +76,13 @@ function createKeyboard() {
 
 // Seleciona o tema
 function selectTheme(theme) {
+    // Verifica se o tema existe
+    if (!WORDS[theme]) {
+        console.error('Tema não existe:', theme);
+        messageElement.textContent = 'Tema não encontrado!';
+        return;
+    }
+
     selectedTheme = theme;
     selectedWord = WORDS[theme][Math.floor(Math.random() * WORDS[theme].length)];
     correctLetters = [];
