@@ -30,12 +30,18 @@ header {
 }
 
 h1 {
-    font-family: 'Rubik Maps', cursive;
-    font-size: 3rem;
-    color: #00FFFF;
-    text-shadow: 3px 3px 0 #0066FF, 5px 5px 0 #00FF41;
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 3.5rem;
+    color: #00E5FF;
+    text-shadow: 
+        2px 2px 0 #0066CC,
+        4px 4px 0 #003366,
+        6px 6px 8px rgba(0, 229, 255, 0.3),
+        0 0 20px rgba(0, 229, 255, 0.5);
     margin-bottom: 20px;
     animation: bounce 2s infinite;
+    letter-spacing: 2px;
 }
 
 .theme-buttons {
