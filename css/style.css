@@ -32,8 +32,8 @@ header {
 h1 {
     font-family: 'Rubik Maps', cursive;
     font-size: 3rem;
-    color: #FF6B6B;
-    text-shadow: 3px 3px 0 #FFE66D, 5px 5px 0 #4ECDC4;
+    color: #00FFFF;
+    text-shadow: 3px 3px 0 #0066FF, 5px 5px 0 #00FF41;
     margin-bottom: 20px;
     animation: bounce 2s infinite;
 }
@@ -64,28 +64,28 @@ h1 {
 }
 
 #animais {
-    background-color: #4ECDC4;
-    color: white;
+    background-color: #1E3A8A;
+    color: #00FFFF;
 }
 
 #casa {
-    background-color: #FF6B6B;
-    color: white;
+    background-color: #065F46;
+    color: #00FF41;
 }
 
 #escola {
-    background-color: #FFE66D;
-    color: #333;
+    background-color: #7C3AED;
+    color: #E0E7FF;
 }
 
 #frutas {
-    background-color: #A5DD9B;
-    color: white;
+    background-color: #059669;
+    color: #ECFDF5;
 }
 
 #profissoes {
-    background-color: #B19CD9;
-    color: white;
+    background-color: #1F2937;
+    color: #60A5FA;
 }
 
 .game-container {
@@ -137,10 +137,16 @@ h1 {
 
 .keyboard {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     gap: 8px;
     margin-top: 20px;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
 }
 
 .key {
@@ -150,17 +156,17 @@ h1 {
     font-weight: bold;
     border: none;
     border-radius: 8px;
-    background-color: #4ECDC4;
-    color: white;
+    background-color: #1F2937;
+    color: #00FFFF;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 3px 0 #3aa89f;
+    box-shadow: 0 3px 0 #374151;
 }
 
 .key:hover {
-    background-color: #3aa89f;
+    background-color: #374151;
     transform: translateY(2px);
-    box-shadow: 0 1px 0 #3aa89f;
+    box-shadow: 0 1px 0 #374151;
 }
 
 .key:disabled {
@@ -226,9 +232,9 @@ h1 {
     }
 }
 
-#familia {
-    background-color: #FF9F1C;
-    color: white;
+#nomes {
+    background-color: #0F172A;
+    color: #00FFFF;
 }
 
 /* Ajuste para espaços nos nomes */

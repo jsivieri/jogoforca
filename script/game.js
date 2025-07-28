@@ -20,9 +20,9 @@ const WORDS = {
         "MEDICO", "PROFESSOR", "ENGENHEIRO", "ADVOGADO", "ARQUITETO", "ENFERMEIRO", "POLICIAL", "BOMBEIRO", "JORNALISTA", "ATOR",
         "CANTOR", "ESCRITOR", "PINTOR", "MUSICO", "COZINHEIRO", "GARCOM", "VENDEDOR", "MOTORISTA", "PILOTO", "ASTRONAUTA"
     ],
-    familia: [
-        "CLARISSE", "JOAO MARCOS", "JOAO LUCAS", "RAFAEL", "LILIAN", "TIO TOCHIME", "TIA YAECO", "TIA LUIZA", "TIA NEILA",
-        "CRISTIANA", "ROGERIO", "PEDRO", "GIOVANA"
+    nomes: [
+        "MARIA", "JOSE", "ANTONIO", "JOAO", "FRANCISCO", "ANA", "CARLOS", "PAULO", "PEDRO", "LUCAS",
+        "LUIZA", "MANOEL", "FRANCISCA", "MARCOS", "RAIMUNDO", "ADRIANA", "MARCIA", "JULIANA", "FERNANDA", "RAFAEL"
     ]
 };
 
@@ -63,15 +63,29 @@ function initGame() {
 // Cria o teclado
 function createKeyboard() {
     keyboard.innerHTML = '';
-    for (let i = 65; i <= 90; i++) {
-        const letter = String.fromCharCode(i);
-        const button = document.createElement('button');
-        button.textContent = letter;
-        button.className = 'key';
-        button.id = `key-${letter}`;
-        button.addEventListener('click', () => handleGuess(letter));
-        keyboard.appendChild(button);
-    }
+    
+    // Layout ABNT2
+    const rows = [
+        ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+        ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ç'],
+        ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
+    ];
+    
+    rows.forEach(row => {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'keyboard-row';
+        
+        row.forEach(letter => {
+            const button = document.createElement('button');
+            button.textContent = letter;
+            button.className = 'key';
+            button.id = `key-${letter}`;
+            button.addEventListener('click', () => handleGuess(letter));
+            rowDiv.appendChild(button);
+        });
+        
+        keyboard.appendChild(rowDiv);
+    });
 }
 
 // Seleciona o tema
@@ -90,13 +104,14 @@ function selectTheme(theme) {
     gameOver = false;
     
     // Atualiza o background
-    body.style.backgroundImage = `url('images/${theme}.jpg')`;
+    const backgroundTheme = theme === 'nomes' ? 'familia' : theme;
+    body.style.backgroundImage = `url('images/${backgroundTheme}.jpg')`;
     
     // Atualiza a exibição da palavra
     updateWordDisplay();
     
     // Mostra a forca inicial
-    hangmanImage.style.backgroundImage = "url('images/forca1.jpg')";
+    hangmanImage.style.backgroundImage = "url('images/forca1.png')";
     messageElement.textContent = '';
     messageElement.className = 'message';
     
@@ -161,7 +176,7 @@ function updateHangmanImage() {
     const errors = wrongLetters.length;
     
     if (errors <= 6) {
-        hangmanImage.style.backgroundImage = `url('images/forca${errors + 1}.jpg')`;
+        hangmanImage.style.backgroundImage = `url('images/forca${errors + 1}.png')`;
     }
     
     if (errors === 6) {
