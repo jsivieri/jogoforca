@@ -80,7 +80,14 @@ function createKeyboard() {
             button.textContent = letter;
             button.className = 'key';
             button.id = `key-${letter}`;
+            
+            // Adicionar eventos para desktop e mobile
             button.addEventListener('click', () => handleGuess(letter));
+            button.addEventListener('touchstart', (e) => {
+                e.preventDefault(); // Prevenir comportamentos indesejados
+                handleGuess(letter);
+            }, { passive: false });
+            
             rowDiv.appendChild(button);
         });
         
@@ -142,7 +149,7 @@ if (!wordDisplay.textContent.includes('_')) {
     messageElement.textContent = 'Parabéns! Você ganhou!';
     messageElement.classList.remove('lose-message');
     messageElement.classList.add('win-message');
-    winSound.play();
+    winSound.play().catch(() => {}); // Ignora erros de áudio
 }
 }
 
@@ -150,23 +157,26 @@ if (!wordDisplay.textContent.includes('_')) {
 function handleGuess(letter) {
     if (gameOver) return;
     
-    // Desabilita a tecla
+    // Verifica se a tecla já foi pressionada
     const keyElement = document.getElementById(`key-${letter}`);
-    if (keyElement) keyElement.disabled = true;
+    if (!keyElement || keyElement.disabled) return;
+    
+    // Desabilita a tecla imediatamente para evitar cliques duplos
+    keyElement.disabled = true;
     
     if (selectedWord.includes(letter)) {
         // Letra correta
         if (!correctLetters.includes(letter)) {
             correctLetters.push(letter);
             updateWordDisplay();
-            correctSound.play();
+            correctSound.play().catch(() => {}); // Ignora erros de áudio
         }
     } else {
         // Letra incorreta
         if (!wrongLetters.includes(letter)) {
             wrongLetters.push(letter);
             updateHangmanImage();
-            wrongSound.play();
+            wrongSound.play().catch(() => {}); // Ignora erros de áudio
         }
     }
 }
@@ -184,9 +194,24 @@ function updateHangmanImage() {
         messageElement.textContent = 'Você perdeu!';
         messageElement.classList.add('lose-message');
         wordDisplay.textContent = selectedWord;
-        loseSound.play();
+        loseSound.play().catch(() => {}); // Ignora erros de áudio
     }
 }
 
 // Inicia o jogo quando a página carrega
 document.addEventListener('DOMContentLoaded', initGame);
+
+// Adiciona suporte ao teclado físico
+document.addEventListener('keydown', function(event) {
+    if (gameOver || !selectedWord) return;
+    
+    const key = event.key.toUpperCase();
+    const validKeys = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Ç'];
+    
+    if (validKeys.includes(key)) {
+        const keyElement = document.getElementById(`key-${key}`);
+        if (keyElement && !keyElement.disabled) {
+            handleGuess(key);
+        }
+    }
+});

@@ -16,6 +16,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    /* Melhorar responsividade em dispositivos móveis */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    touch-action: manipulation;
 }
 
 .container {
@@ -167,6 +171,18 @@ h1 {
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: 0 3px 0 #374151;
+    /* Melhorar responsividade em dispositivos móveis */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 255, 255, 0.3);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Garantir que o botão seja clicável em dispositivos touch */
+    min-width: 40px;
+    min-height: 40px;
 }
 
 .key:hover {
@@ -217,8 +233,12 @@ h1 {
 }
 
 @media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
     .game-container {
-        width: 90%;
+        width: 95%;
         padding: 15px;
     }
     
@@ -226,15 +246,100 @@ h1 {
         font-size: 2rem;
     }
     
+    .theme-buttons {
+        gap: 8px;
+    }
+    
+    .theme-buttons button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    
     .word-display {
         font-size: 1.5rem;
-        letter-spacing: 5px;
+        letter-spacing: 3px;
+        margin: 20px 0;
+    }
+    
+    .hangman-image {
+        height: 150px;
+    }
+    
+    .keyboard {
+        gap: 6px;
+        margin-top: 15px;
+    }
+    
+    .keyboard-row {
+        gap: 4px;
+    }
+    
+    .key {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+        border-radius: 6px;
+        /* Melhor responsividade ao toque */
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .message {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .theme-buttons {
+        gap: 5px;
+    }
+    
+    .theme-buttons button {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .game-container {
+        width: 98%;
+        padding: 10px;
+    }
+    
+    .word-display {
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+        margin: 15px 0;
+    }
+    
+    .hangman-image {
+        height: 120px;
+    }
+    
+    .keyboard {
+        gap: 4px;
+        margin-top: 10px;
+    }
+    
+    .keyboard-row {
+        gap: 3px;
     }
     
     .key {
         width: 30px;
         height: 30px;
-        font-size: 1rem;
+        font-size: 0.9rem;
+        border-radius: 4px;
+        /* Otimização para telas pequenas */
+        min-width: 30px;
+        flex-shrink: 0;
+    }
+    
+    .message {
+        font-size: 1.2rem;
     }
 }
 
